@@ -32,10 +32,19 @@ public class Roman_Scraper
 	{
 		ArrayList<String> 	dinasty_links_tree;
 		String				link = dinasty_links.get(index);
+		ArrayList<String>	names;
 
 		dinasty_links_tree = scraper.hrefXpathFilterScrape(link, "Albero_genealogico", "vedi-anche noprint", "table");
 		print(dinasty_links_tree);
 		dinasty_link_tree = dinasty_links_tree.get(0);
+		names = scraper.textXpathScrape(dinasty_link_tree, "td[@colspan='2']");
+		for (String name : names)
+		{
+			name = name.replaceAll("[^A-Za-z0-9]", " ").replaceAll(" +", " ").strip();
+			if (name.equals(""))
+				continue ;
+			System.out.println("|"+name+"|");	// get via href ?
+		}
 	}
 
 	public ArrayList<String> getDinasties()
@@ -47,6 +56,7 @@ public class Roman_Scraper
 	{
 		return (dinasty_links);
 	}
+
 	public static void print(ArrayList<String> array)
 	{
 		array.forEach(element -> System.out.println(element));

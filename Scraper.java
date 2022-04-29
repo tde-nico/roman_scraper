@@ -105,4 +105,25 @@ public class Scraper
 		elements = driver.findElements(By.xpath("//" + xpath + "[@class = '" + className + "']"));
 		return (hrefFilter(elements, filter));
 	}
+
+	public ArrayList<String>	textXpathScrape(String url, String xpath)
+	{
+		List<WebElement>	elements;
+		ArrayList<String>	res = new ArrayList<String>();
+
+		driver.get(url);
+		elements = driver.findElements(By.xpath("//" + xpath));// + "[@class = '" + className + "']")); //classScrape(url, "new");
+		//System.out.println(elements.get(0).getText());
+		//	//*[@id="mw-content-text"]/div[1]/div[2]
+		//	//*[@id="mw-content-text"]/div[1]/div[3]
+
+		//	//*[@id="mw-content-text"]/div[1]/div[1]
+
+		//	//*[@id="mw-content-text"]/div[1]/div[2]
+		//	https://it.wikipedia.org/wiki/Dinastia_costantiniana#/media/File:Constantian_Dynasty,_the_children_of_Constantius.png
+		//elements.forEach(element -> System.out.println("[+++]" + element.getText().replaceAll("\\p{C}", " ").strip()));
+		//elements.forEach(element -> System.out.println("[+++] " + element.getText().replaceAll("[^A-Za-z]", " ").replaceAll(" +", " ").strip()));
+		elements.forEach(element -> res.add(element.getText()));
+		return (res);
+	}
 }
