@@ -12,7 +12,7 @@ public class Scraper
 
 	public Scraper()
 	{
-		System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "../chromedriver.exe");
 		driver = new ChromeDriver();
 		System.out.println("\n[+] Init\n");
 	}
