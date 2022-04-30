@@ -33,18 +33,25 @@ public class Roman_Scraper
 		ArrayList<String> 	dinasty_links_tree;
 		String				link = dinasty_links.get(index);
 		ArrayList<String>	names;
+		//Dinasty_Node		d;
 
 		dinasty_links_tree = scraper.hrefXpathFilterScrape(link, "Albero_genealogico", "vedi-anche noprint", "table");
 		print(dinasty_links_tree);
+		System.out.println();
 		dinasty_link_tree = dinasty_links_tree.get(0);
-		names = scraper.textXpathScrape(dinasty_link_tree, "td[@colspan='2']");
+		names = scraper.hrefXpathScrape(dinasty_link_tree, "td[@colspan='2']"); 
+		//names = scraper.textXpathScrape(dinasty_link_tree, "td[@colspan='2']");
 		for (String name : names)
 		{
-			name = name.replaceAll("[^A-Za-z0-9]", " ").replaceAll(" +", " ").strip();
-			if (name.equals(""))
-				continue ;
-			System.out.println("|"+name+"|");	// get via href ?
+			/*name = name.replaceAll("[^A-Za-z0-9]", " ").replaceAll(" +", " ").strip();
+			if (name.equals(""))		// get via href ?
+				continue ;*/
+			
+			System.out.println("\n|"+name+"|\n");	
+			
+			//scraper.hrefXpathFilterScrape(name, "Albero_genealogico", "sinottico", "");
 		}
+		print(scraper.hrefFilterScrape(names.get(0), "", "sinottico"));
 	}
 
 	public ArrayList<String> getDinasties()

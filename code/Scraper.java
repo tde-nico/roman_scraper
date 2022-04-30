@@ -12,7 +12,7 @@ public class Scraper
 
 	public Scraper()
 	{
-		System.setProperty("webdriver.chrome.driver", "../chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
 		driver = new ChromeDriver();
 		System.out.println("\n[+] Init\n");
 	}
@@ -124,6 +124,17 @@ public class Scraper
 		//elements.forEach(element -> System.out.println("[+++]" + element.getText().replaceAll("\\p{C}", " ").strip()));
 		//elements.forEach(element -> System.out.println("[+++] " + element.getText().replaceAll("[^A-Za-z]", " ").replaceAll(" +", " ").strip()));
 		elements.forEach(element -> res.add(element.getText()));
+		return (res);
+	}
+
+	public ArrayList<String>	hrefXpathScrape(String url, String xpath)
+	{
+		List<WebElement>	elements;
+		ArrayList<String>	res = new ArrayList<String>();
+
+		driver.get(url);
+		elements = driver.findElements(By.xpath("//" + xpath));
+		res = hrefFilter(elements, "");
 		return (res);
 	}
 }
